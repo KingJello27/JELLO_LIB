@@ -14,7 +14,9 @@ void initialize() {
 	pros::lcd::initialize();
 	
 	//Init Functions
-	pneumatcsInit();
+	pneumaticsInit();
+	liftInit();
+	clampInit();
 
 	//Async Tasks
 	pros::Task ladyBrownTask(liftAsyncController);

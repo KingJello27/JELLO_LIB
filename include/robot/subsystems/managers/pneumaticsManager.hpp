@@ -2,7 +2,7 @@
 #include "main.h"
 
 //Initialization
-extern void pneumatcsInit();
+extern void pneumaticsInit();
 
 //State Getter
 extern bool getTipperState();

@@ -19,7 +19,7 @@ void setPosition(double targetPosition){
 }
 
 //Initialization
-void ladyBrownInit(){
+void liftInit(){
     liftRotationSensor.reset_position();
     ladyBrownTargetPosition = 0;
     kP = 0.02;

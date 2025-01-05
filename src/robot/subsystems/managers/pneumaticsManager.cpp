@@ -7,7 +7,7 @@ bool tipperState;
 bool raiserState;
 
 //Initialization
-void pneumatcsInit(){
+void pneumaticsInit(){
     tipperState = false;
     raiserState = false;
 
