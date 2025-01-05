@@ -2,6 +2,7 @@
 #include "robot/subsystems/managers/pneumaticsManager.hpp"
 #include "robot/globals.hpp"
 #include "robot/subsystems/controller/liftController.hpp"
+#include "robot/subsystems/controller/clampController.hpp"
 
 void opcontrol() {
 	
@@ -9,7 +10,7 @@ void opcontrol() {
 		
 		//Pneumatics
 		if (controller.get_digital_new_press(DIGITAL_L1)){
-			toggleClamp();
+			toggleClampButtonPressed();
 		}
 
 		if (controller.get_digital_new_press(DIGITAL_UP)){

@@ -34,3 +34,4 @@ pros::Rotation liftRotationSensor(8);
 
 //Color Sensors
 pros::Optical intakeColorSensor(10);
+pros::Optical clampColorSensor(1);

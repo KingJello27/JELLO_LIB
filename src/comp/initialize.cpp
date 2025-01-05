@@ -2,6 +2,7 @@
 #include "robot/subsystems/managers/pneumaticsManager.hpp"
 #include "robot/subsystems/controller/liftController.hpp"
 #include "robot/subsystems/controller/intakeColorController.hpp"
+#include "robot/subsystems/controller/clampController.hpp"
 
 /**
  * Runs initialization code. This occurs as soon as the program is started.
@@ -18,6 +19,7 @@ void initialize() {
 	//Async Tasks
 	pros::Task ladyBrownTask(liftAsyncController);
 	pros::Task intakeColorTask(ringDetect);
+	pros::Task clampColorTask(clampAsyncController);
 
 }
 
