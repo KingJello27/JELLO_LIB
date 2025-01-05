@@ -3,6 +3,7 @@
 #include "robot/globals.hpp"
 #include "robot/subsystems/controller/liftController.hpp"
 #include "robot/subsystems/controller/clampController.hpp"
+#include "robot/subsystems/managers/intakeManager.hpp"
 
 void opcontrol() {
 	
@@ -25,6 +26,9 @@ void opcontrol() {
 		if (controller.get_digital_new_press(DIGITAL_L2)){
 			setLift();
 		}
+
+		//Intake Control
+		setIntakeMotors();
 
 		pros::delay(20); 
 	}
