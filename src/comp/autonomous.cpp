@@ -1,4 +1,5 @@
 #include "main.h"
+#include "robot/subsystems/controller/chassisController.hpp"
 
 /**
  * Runs the user autonomous code. This function will be started in its own task
@@ -11,7 +12,15 @@
  * will be stopped. Re-enabling the robot will restart the task, not re-start it
  * from where it left off.
  */
-void autonomous() {}
+void autonomous() {
+    moveDistance(24, 100, 60, 4000, 15);
+    pros::delay(10);
+    moveDistance(-24, 100, 60);
+    pros::delay(10);
+    turnAngle(90, 127, 60);
+    pros::delay(10);
+    turnAngle(-90, 127, 60);
+}
 
 /**
  * Runs the operator control code. This function will be started in its own task

@@ -3,6 +3,7 @@
 #include "robot/subsystems/controller/liftController.hpp"
 #include "robot/subsystems/controller/intakeColorController.hpp"
 #include "robot/subsystems/controller/clampController.hpp"
+#include "robot/subsystems/controller/chassisController.hpp"
 
 /**
  * Runs initialization code. This occurs as soon as the program is started.
@@ -17,6 +18,7 @@ void initialize() {
 	pneumaticsInit();
 	liftInit();
 	clampInit();
+	chassisInit();
 
 	//Async Tasks
 	pros::Task ladyBrownTask(liftAsyncController);
