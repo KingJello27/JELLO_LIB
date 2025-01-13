@@ -14,8 +14,8 @@ pros::MotorGroup intakeGroup({-7,-15}, pros::MotorGearset::blue);
 
 //Pneumatics
 pros::ADIDigitalOut clamp('E');
-pros::ADIDigitalOut tipper('G');
-pros::ADIDigitalOut raiser('C');
+pros::ADIDigitalOut tipper('C');
+pros::ADIDigitalOut raiser('G');
 
 //Drive Motors
 pros::Motor leftFront(-18, pros::MotorGearset::blue);
@@ -31,6 +31,9 @@ pros::MotorGroup rightdr({9,4,21}, pros::MotorGears::blue);
 
 //Rotation Sensors
 pros::Rotation liftRotationSensor(8);
+
+//Inertial Sensor
+pros::IMU imu_sensor(1);
 
 //Color Sensors
 pros::Optical intakeColorSensor(10);

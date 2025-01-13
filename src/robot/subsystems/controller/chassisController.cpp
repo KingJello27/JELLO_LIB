@@ -4,8 +4,8 @@
 
 //Initialization
 void chassisInit(){
-    imu.reset();
-    while(imu.is_calibrating()){
+    imu_sensor.reset();
+    while(imu_sensor.is_calibrating()){
         pros::delay(20);
     }
     controller.rumble("--");
@@ -200,7 +200,7 @@ void turnAngle(double targetAngle, double maxVoltage, double minVoltage, double 
             settled = false;
         }
 
-        error = normalizeAngle180(targetAngle - normalizeAngle360(imu.get_heading()));
+        error = normalizeAngle180(targetAngle - normalizeAngle360(imu_sensor.get_heading()));
 
         if (abs(error) < integralCap){
             integral = integral + error;
@@ -273,7 +273,7 @@ void turnAngle(double targetAngle, double maxVoltage, double minVoltage){
             settled = false;
         }
 
-        error = normalizeAngle180(targetAngle - normalizeAngle360(imu.get_heading()));
+        error = normalizeAngle180(targetAngle - normalizeAngle360(imu_sensor.get_heading()));
 
         if (abs(error) < integralCap){
             integral = integral + error;

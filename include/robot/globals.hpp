@@ -20,7 +20,7 @@ extern pros::Motor leftFront, leftMiddle, leftBack, rightFront, rightMiddle, rig
 extern pros::MotorGroup leftdr, rightdr;
 
 //IMU
-extern pros::IMU imu;
+extern pros::IMU imu_sensor;
 
 //Rotation Sensors
 extern pros::Rotation liftRotationSensor;
