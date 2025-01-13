@@ -1,5 +1,6 @@
 #include "robot/subsystems/controller/liftController.hpp"
 #include "robot/globals.hpp"
+#include "utils/utils.hpp"
 
 double ladyBrownTargetPosition;
 double kP;
@@ -15,7 +16,7 @@ double getData(){
 
 //Setters
 void setPosition(double targetPosition){
-    ladyBrownTargetPosition = targetPosition;
+    ladyBrownTargetPosition = thetaToTicks(targetPosition);
 }
 
 //Initialization
@@ -45,10 +46,10 @@ void liftAsyncController(void * param){
 
 void setLift(){
     if (liftCounter == 0) {
-        setPosition(1950);
+        setPosition(10);
     }
     else if (liftCounter == 1) {
-        setPosition(13000);
+        setPosition(90);
         waitUntilSettled();
         manual = true;
     }

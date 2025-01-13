@@ -4,8 +4,11 @@
 #include "robot/subsystems/controller/liftController.hpp"
 #include "robot/subsystems/controller/clampController.hpp"
 #include "robot/subsystems/managers/intakeManager.hpp"
+#include "robot/subsystems/controller/chassisController.hpp"
 
 void opcontrol() {
+
+	setMotorsCoast();
 	
 	while (true) {
 		

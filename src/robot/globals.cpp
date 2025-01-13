@@ -14,8 +14,8 @@ pros::MotorGroup intakeGroup({-7,-15}, pros::MotorGearset::blue);
 
 //Pneumatics
 pros::ADIDigitalOut clamp('E');
-pros::ADIDigitalOut tipper('C');
-pros::ADIDigitalOut raiser('G');
+pros::ADIDigitalOut tipper('G');
+pros::ADIDigitalOut raiser('C');
 
 //Drive Motors
 pros::Motor leftFront(-18, pros::MotorGearset::blue);
