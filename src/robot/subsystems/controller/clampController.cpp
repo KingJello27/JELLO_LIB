@@ -1,59 +1,41 @@
-#include "main.h"
+#include "robot/subsystems/controller/clampController.hpp"
 #include "robot/globals.hpp"
 
-bool isTilted = false;
-bool isGoalDetected = false;
-bool isClampButtonPressed = false;
-bool clampState;
-int sensedColor = 0;
+bool isClamped = true;
+bool justChanged = false;
+int elapsedClampTime = 0;
 
-void toggleClampButtonPressed(){
-    isClampButtonPressed = !isClampButtonPressed;
-}
-
-void detectClamp(){
-
-    sensedColor = clampColorSensor.get_hue();
-
-    if (sensedColor >= 200 && sensedColor <= 280){
-        isGoalDetected = true;
-    }else{
-        isGoalDetected = false;
-    }
-
-}
-
-void enactClamp(){
-
-    if (isGoalDetected == true){
-        if (controller.get_digital_new_press(DIGITAL_L1)){
-            clamp.set_value(false);
-        }else{
-            clamp.set_value(true);
-        }
-    }else if (isGoalDetected == false){
-        if (controller.get_digital_new_press(DIGITAL_L1)){
-            clamp.set_value(true);
-        }else{
-            clamp.set_value(false);
-        }
-    }
-
-}
-
+//Initialize
 void clampInit(){
-    clampState = false;
-    clamp.set_value(clampState);
+    clamp.set_value(true);
+    isClamped = true;
+    justChanged = false;
+    elapsedClampTime = 0;
 }
 
+//Getter
 bool getClampState(){
-    return clampState;
+    return isClamped;
 }
 
-//Clamp Async Controller
-void clampAsyncController(void * param){
-   while(true){
-        detectClamp();
-        enactClamp();
-   } 
+//Setter
+void setClamp(bool input){
+    clamp.set_value(input);
+}
+
+void toggleClamp(){
+    isClamped = !isClamped;
+    clamp.set_value(isClamped);
+}
+
+void autoClamp(){
+    if(goalSensor.get() < 20 && !justChanged){
+        toggleClamp();
+        justChanged = true;
+        elapsedClampTime = 0;
+    }
+
+    if (elapsedClampTime > 1000){
+        justChanged = false;
+    }
 }

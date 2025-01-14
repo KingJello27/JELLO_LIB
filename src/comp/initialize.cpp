@@ -22,7 +22,6 @@ void initialize() {
 
 	//Async Tasks
 	pros::Task ladyBrownTask(liftAsyncController);
-	pros::Task clampTask(clampAsyncController);
 	pros::Task intakeTask(intakeAsyncController);
 
 

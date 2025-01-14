@@ -10,11 +10,12 @@ void opcontrol() {
 
 	setMotorsCoast();
 	
+	
 	while (true) {
 		
 		//Pneumatics
 		if (controller.get_digital_new_press(DIGITAL_L1)){
-			toggleClampButtonPressed();
+			autoClamp();
 		}
 
 		if (controller.get_digital_new_press(DIGITAL_UP)){
@@ -33,6 +34,7 @@ void opcontrol() {
 		//Intake Control
 		setIntakeMotors();
 
-		pros::delay(20); 
+		pros::delay(20);
+		elapsedClampTime += 10;
 	}
 }

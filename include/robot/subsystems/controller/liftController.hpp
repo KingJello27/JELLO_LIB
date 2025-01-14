@@ -14,6 +14,9 @@ extern double getData();
 
 extern void waitUntilSettled();
 
+//Getter
+extern bool getIsPrimed();
+
 //Lift Opcontrol
 extern void setLift();
 

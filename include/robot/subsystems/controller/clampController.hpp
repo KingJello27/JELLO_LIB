@@ -1,15 +1,8 @@
 #pragma once
 #include "main.h"
 
-//HELPER FUNCTIONS
-//Enact Clamp
-extern void enactClamp();
-
-//Detect Clamp
-extern void detectClamp();
-
 //Toggle
-extern void toggleClampButtonPressed();
+extern void toggleClamp();
 
 //Initalize
 extern void clampInit();
@@ -17,5 +10,10 @@ extern void clampInit();
 //State Getter
 extern bool getClampState();
 
-//Clamp Async Controller
-extern void clampAsyncController(void * param);
+//State Setter
+extern void setClamp(bool input);
+
+//Auto Clamp
+extern void autoClamp();
+extern bool justChanged;
+extern int elapsedClampTime;

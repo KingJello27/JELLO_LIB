@@ -2,13 +2,14 @@
 #include "robot/globals.hpp"
 #include "utils/utils.hpp"
 
-double ladyBrownTargetPosition;
+double liftTargetPosition;
 double kP;
 double error;
 double input;
 bool settled = false;
 bool manual;
 int liftCounter;
+bool isPrimed = false;
 
 double getData(){
     return input;
@@ -16,13 +17,18 @@ double getData(){
 
 //Setters
 void setPosition(double targetPosition){
-    ladyBrownTargetPosition = thetaToTicks(targetPosition);
+    liftTargetPosition = thetaToTicks(targetPosition);
+}
+
+//getters
+bool getIsPrimed(){
+    return isPrimed;
 }
 
 //Initialization
 void liftInit(){
     liftRotationSensor.reset_position();
-    ladyBrownTargetPosition = 0;
+    liftTargetPosition = 0;
     kP = 0.02;
     lift.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 }
@@ -32,7 +38,7 @@ void liftAsyncController(void * param){
     while (true){
         if (manual == false){
             settled = false;
-            error = ladyBrownTargetPosition - liftRotationSensor.get_position(); 
+            error = liftTargetPosition - liftRotationSensor.get_position(); 
             if (error < 3 && error > -3){
                 error = 0;
                 settled = true;
@@ -47,14 +53,15 @@ void liftAsyncController(void * param){
 void setLift(){
     if (liftCounter == 0) {
         setPosition(10);
+        isPrimed == true;
     }
     else if (liftCounter == 1) {
         setPosition(90);
-        waitUntilSettled();
-        manual = true;
+        isPrimed == false;
     }
     else if (liftCounter == 2) {
         setPosition(0);
+        isPrimed == false;
     }
     liftCounter ++;
     liftCounter = liftCounter % 3;

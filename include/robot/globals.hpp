@@ -28,3 +28,6 @@ extern pros::Rotation liftRotationSensor;
 //Color Sensors
 extern pros::Optical intakeColorSensor;
 extern pros::Optical clampColorSensor;
+
+//Distance Sensors
+extern pros::Distance goalSensor;

@@ -37,4 +37,6 @@ pros::IMU imu_sensor(1);
 
 //Color Sensors
 pros::Optical intakeColorSensor(10);
-pros::Optical clampColorSensor(1);
+
+//Distance Sensors
+pros::Distance goalSensor(11);

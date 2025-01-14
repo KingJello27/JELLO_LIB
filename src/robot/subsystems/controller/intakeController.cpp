@@ -1,5 +1,6 @@
 #include "robot/globals.hpp"
 #include "robot/subsystems/controller/intakeController.hpp"
+#include "robot/subsystems/controller/liftController.hpp"
 
 bool isActuallyIntaking  = true;
 double targetVelocity;
@@ -31,22 +32,24 @@ void setIntakeMotors() {
 
 void intakeAsyncController(void * param){
     while(true){
-        //Cooldown
-        pros::delay(500);
+        if (getIsPrimed() == false){
+            //Cooldown
+            pros::delay(500);
 
-        targetVelocity = intakeHooks.get_target_velocity();
-        actualVelocity = intakeHooks.get_actual_velocity();
+            targetVelocity = intakeHooks.get_target_velocity();
+            actualVelocity = intakeHooks.get_actual_velocity();
 
-        if ((targetVelocity > 100) && ((targetVelocity - actualVelocity) > (targetVelocity / 2))) {
-            isActuallyIntaking  = false;
+            if ((targetVelocity > 100) && ((targetVelocity - actualVelocity) > (targetVelocity / 2))) {
+                isActuallyIntaking  = false;
 
-            intakeGroup.move(-127);
-            pros::delay(1000);
+                intakeGroup.move(-127);
+                pros::delay(1000);
 
-            intakeGroup.move(0);
-            isActuallyIntaking  = true;
+                intakeGroup.move(0);
+                isActuallyIntaking  = true;
+            }
+
+            pros::delay(10);
         }
-
-        pros::delay(10);
     }
 }
