@@ -4,6 +4,7 @@
 #include "robot/subsystems/controller/liftController.hpp"
 #include "robot/subsystems/controller/clampController.hpp"
 #include "robot/subsystems/controller/chassisController.hpp"
+#include "robot/subsystems/controller/intakeController.hpp"
 
 void opcontrol() {
 
@@ -29,8 +30,8 @@ void opcontrol() {
 			setLift();
 		}
 
-		// //Intake Control
-		// setIntakeMotors();
+		//Intake Control
+		setIntakeMotors();
 
 		pros::delay(20); 
 	}
