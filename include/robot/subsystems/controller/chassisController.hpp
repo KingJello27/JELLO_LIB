@@ -15,6 +15,7 @@ double getChassisError();
 bool isChassisSettled();
 
 //User Control
+extern void setDriveMode(int input);
 extern void setDriveMotors();
 
 //Chassis Movement Function

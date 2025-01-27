@@ -22,23 +22,64 @@ void chassisMotion(double leftVoltage, double rightVoltage){
     rightdr.move_voltage(rightVoltage);
 }
 
-//User Control Drive Function
+//User Control Drive Functions
+
+int driveMode;
+
+void setDriveMode(int input){
+    driveMode = input;
+}
+
 void setDriveMotors(){
-    int leftJoystick = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
-    int rightJoystick = controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y);
 
-    if (abs(leftJoystick) < 10){
-        leftJoystick = 0;
+    //Tank Drive
+    int leftInput;
+    int rightInput;
+
+    //Arcade Drive
+    int latInput;
+    int angInput;
+
+
+    if (driveMode == 0){
+
+        //Tank Drive
+        leftInput = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
+        rightInput = controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y);
+
+        if (abs(leftInput) < 10){
+            leftInput = 0;
+        }
+
+        if (abs(rightInput) < 10){
+            rightInput = 0;
+        }
+
+        leftInput = powerToVolts(leftInput);
+        rightInput = powerToVolts(rightInput);
+
+        chassisMotion(leftInput, rightInput);
+
+    }else if (driveMode == 1){
+
+        //Arcade Drive
+        latInput = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
+        angInput = controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);
+
+        if (abs(latInput) < 10){
+            latInput = 0;
+        }
+
+        if (abs(angInput) < 10){
+            angInput = 0;
+        }
+
+        latInput = powerToVolts(latInput);
+        angInput = powerToVolts(angInput);
+
+        chassisMotion(latInput + angInput, latInput - angInput);
+
     }
-
-    if (abs(rightJoystick) < 10){
-        rightJoystick = 0;
-    }
-
-    leftJoystick = powerToVolts(leftJoystick);
-    rightJoystick = powerToVolts(rightJoystick);
-
-    chassisMotion(leftJoystick, rightJoystick);
 }
 
 //Lateral Drive Functions with PID

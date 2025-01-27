@@ -9,7 +9,7 @@
 void opcontrol() {
 
 	setMotorsCoast();
-	
+	setDriveMode(1); //Tank Control = 0 | Arcade Control = 1
 	
 	while (true) {
 		
