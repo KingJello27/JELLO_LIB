@@ -14,6 +14,9 @@ extern void setMotorsCoast();
 double getChassisError();
 bool isChassisSettled();
 
+//User Control
+extern void setDriveMotors();
+
 //Chassis Movement Function
 extern void chassisMotion(double leftVoltage, double rightVoltage);
 

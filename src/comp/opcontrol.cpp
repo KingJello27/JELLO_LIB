@@ -13,6 +13,9 @@ void opcontrol() {
 	
 	while (true) {
 		
+		//Drive Control
+		setDriveMotors();
+
 		//Pneumatics
 		if (controller.get_digital_new_press(DIGITAL_L1)){
 			autoClamp();

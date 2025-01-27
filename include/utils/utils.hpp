@@ -9,6 +9,8 @@ const double liftGearRatio = 5 / 1;
 //Conversion Function
 extern double inchesToTicks(double inches);
 extern double thetaToTicks(double theta);
+extern double voltsToPower(double voltage);
+extern double powerToVolts(double power);
 
 //Angle Normalization
 extern double normalizeAngle180(double theta);
