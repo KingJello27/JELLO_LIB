@@ -10,9 +10,12 @@ const double swingKp = 0, swingKi = 0, swingKd = 0;
 extern void chassisInit();
 extern void setMotorsCoast();
 
+//Chassis State
+extern bool chassisSettled;
+
 //Getters
-double getChassisError();
-bool isChassisSettled();
+extern double getChassisError();
+extern bool isChassisSettled();
 
 //User Control
 extern void setDriveMode(int input);
@@ -20,6 +23,11 @@ extern void setDriveMotors();
 
 //Chassis Movement Function
 extern void chassisMotion(double leftVoltage, double rightVoltage);
+
+//Exit Functions
+// extern void setQuickWait(double input);
+// extern void waitUntil(double input);
+// extern void quickWait();
 
 //Lateral Movement Functions
 extern void moveDistance(double target, double maxVoltage, double minVoltage, double timeout, double integralCap); //Advanced Function

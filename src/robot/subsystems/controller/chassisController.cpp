@@ -2,6 +2,11 @@
 #include "robot/globals.hpp"
 #include "utils/utils.hpp"
 
+//Chassis Variable
+bool chassisSettled;
+double chassisError;
+// double quickWaitTarget;
+
 //Initialization
 void chassisInit(){
     imu_sensor.reset();
@@ -14,6 +19,15 @@ void chassisInit(){
 void setMotorsCoast(){
     leftdr.set_brake_mode(MOTOR_BRAKE_COAST);
     rightdr.set_brake_mode(MOTOR_BRAKE_COAST);
+}
+
+//Getters
+bool isChassisSettled(){
+    return chassisSettled;
+}
+
+double getChassisError(){
+    return chassisError;
 }
 
 //Chassis Movement Function
@@ -38,7 +52,6 @@ void setDriveMotors(){
     //Arcade Drive
     int latInput;
     int angInput;
-
 
     if (driveMode == 0){
 
@@ -81,6 +94,20 @@ void setDriveMotors(){
     }
 }
 
+//Exit Functions
+
+// void setQuickWait(double input){
+//     quickWaitTarget = input;
+// }
+
+// void waitUntil(double input){
+
+// }
+
+// void quickWait(){
+
+// }
+
 //Lateral Drive Functions with PID
 
 //Advanced Function
@@ -91,7 +118,7 @@ void moveDistance(double target, double maxVoltage, double minVoltage, double ti
     leftdr.set_brake_mode(MOTOR_BRAKE_HOLD);
     rightdr.set_brake_mode(MOTOR_BRAKE_HOLD);
 
-    bool settled = false;
+    chassisSettled = false;
     double error = 0;
     double integral = 0;
     double previousError = 0;
@@ -104,17 +131,18 @@ void moveDistance(double target, double maxVoltage, double minVoltage, double ti
     double timeSettled = 0;
     double totalTime = 0;
 
-    while (!settled){
+    while (!chassisSettled){
         
         if (totalTime > timeout && timeout != 0){
-            settled = true;
+            chassisSettled = true;
         }else if (timeSettled > settleTime){
-            settled = true;
+            chassisSettled = true;
         }else {
-            settled = false;
+            chassisSettled = false;
         }
 
         error = inchesToTicks(target) - ((leftdr.get_position() + rightdr.get_position()) / 2);
+        chassisError = error;
 
         if (abs(error) < integralCap){
             integral = integral + error;
@@ -162,7 +190,7 @@ void moveDistance(double target, double maxVoltage, double minVoltage){
     leftdr.set_brake_mode(MOTOR_BRAKE_HOLD);
     rightdr.set_brake_mode(MOTOR_BRAKE_HOLD);
 
-    bool settled = false;
+    chassisSettled = false;
     double error = 0;
     double integral = 0;
     double previousError = 0;
@@ -178,17 +206,18 @@ void moveDistance(double target, double maxVoltage, double minVoltage){
     double timeout = 4000;
     double integralCap = 15;
 
-    while (!settled){
+    while (!chassisSettled){
         
         if (totalTime > timeout && timeout != 0){
-            settled = true;
+            chassisSettled = true;
         }else if (timeSettled > settleTime){
-            settled = true;
+            chassisSettled = true;
         }else {
-            settled = false;
+            chassisSettled = false;
         }
 
         error = inchesToTicks(target) - ((leftdr.get_position() + rightdr.get_position()) / 2);
+        chassisError = error;
 
         if (abs(error) < integralCap){
             integral = integral + error;
@@ -240,7 +269,7 @@ void turnAngle(double targetAngle, double maxVoltage, double minVoltage, double 
     leftdr.set_brake_mode(MOTOR_BRAKE_HOLD);
     rightdr.set_brake_mode(MOTOR_BRAKE_HOLD);
 
-    bool settled = false;
+    chassisSettled = false;
     double error = 0;
     double integral = 0;
     double previousError = 0;
@@ -253,17 +282,18 @@ void turnAngle(double targetAngle, double maxVoltage, double minVoltage, double 
     double timeSettled = 0;
     double totalTime = 0;
 
-    while (!settled){
+    while (!chassisSettled){
         
         if (totalTime > timeout && timeout != 0){
-            settled = true;
+            chassisSettled = true;
         }else if (timeSettled > settleTime){
-            settled = true;
+            chassisSettled = true;
         }else {
-            settled = false;
+            chassisSettled = false;
         }
 
         error = normalizeAngle180(targetAngle - normalizeAngle360(imu_sensor.get_heading()));
+        chassisError = error;
 
         if (abs(error) < integralCap){
             integral = integral + error;
@@ -311,7 +341,7 @@ void turnAngle(double targetAngle, double maxVoltage, double minVoltage){
     leftdr.set_brake_mode(MOTOR_BRAKE_HOLD);
     rightdr.set_brake_mode(MOTOR_BRAKE_HOLD);
 
-    bool settled = false;
+    chassisSettled = false;
     double error = 0;
     double integral = 0;
     double previousError = 0;
@@ -327,17 +357,18 @@ void turnAngle(double targetAngle, double maxVoltage, double minVoltage){
     double timeout = 4000;
     double integralCap = 15;
 
-    while (!settled){
+    while (!chassisSettled){
         
         if (totalTime > timeout && timeout != 0){
-            settled = true;
+            chassisSettled = true;
         }else if (timeSettled > settleTime){
-            settled = true;
+            chassisSettled = true;
         }else {
-            settled = false;
+            chassisSettled = false;
         }
 
         error = normalizeAngle180(targetAngle - normalizeAngle360(imu_sensor.get_heading()));
+        chassisError = error;
 
         if (abs(error) < integralCap){
             integral = integral + error;
@@ -387,7 +418,7 @@ void swingLeft(double targetAngle, double maxVoltage, double minVoltage, double 
     leftdr.set_brake_mode(MOTOR_BRAKE_HOLD);
     rightdr.set_brake_mode(MOTOR_BRAKE_HOLD);
 
-    bool settled = false;
+    chassisSettled = false;
     double error = 0;
     double integral = 0;
     double previousError = 0;
@@ -400,17 +431,18 @@ void swingLeft(double targetAngle, double maxVoltage, double minVoltage, double 
     double timeSettled = 0;
     double totalTime = 0;
 
-    while (!settled){
+    while (!chassisSettled){
         
         if (totalTime > timeout && timeout != 0){
-            settled = true;
+            chassisSettled = true;
         }else if (timeSettled > settleTime){
-            settled = true;
+            chassisSettled = true;
         }else {
-            settled = false;
+            chassisSettled = false;
         }
 
         error = normalizeAngle180(targetAngle - normalizeAngle360(imu_sensor.get_heading()));
+        chassisError = error;
 
         if (abs(error) < integralCap){
             integral = integral + error;
@@ -456,7 +488,7 @@ void swingRight(double targetAngle, double maxVoltage, double minVoltage, double
     leftdr.set_brake_mode(MOTOR_BRAKE_HOLD);
     rightdr.set_brake_mode(MOTOR_BRAKE_HOLD);
 
-    bool settled = false;
+    chassisSettled = false;
     double error = 0;
     double integral = 0;
     double previousError = 0;
@@ -469,17 +501,18 @@ void swingRight(double targetAngle, double maxVoltage, double minVoltage, double
     double timeSettled = 0;
     double totalTime = 0;
 
-    while (!settled){
+    while (!chassisSettled){
         
         if (totalTime > timeout && timeout != 0){
-            settled = true;
+            chassisSettled = true;
         }else if (timeSettled > settleTime){
-            settled = true;
+            chassisSettled = true;
         }else {
-            settled = false;
+            chassisSettled = false;
         }
 
         error = normalizeAngle180(targetAngle - normalizeAngle360(imu_sensor.get_heading()));
+        chassisError = error;
 
         if (abs(error) < integralCap){
             integral = integral + error;
@@ -527,7 +560,7 @@ void swingLeft(double targetAngle, double maxVoltage, double minVoltage){
     leftdr.set_brake_mode(MOTOR_BRAKE_HOLD);
     rightdr.set_brake_mode(MOTOR_BRAKE_HOLD);
 
-    bool settled = false;
+    chassisSettled = false;
     double error = 0;
     double integral = 0;
     double previousError = 0;
@@ -543,17 +576,18 @@ void swingLeft(double targetAngle, double maxVoltage, double minVoltage){
     double timeout = 4000;
     double integralCap = 15;
 
-    while (!settled){
+    while (!chassisSettled){
         
         if (totalTime > timeout && timeout != 0){
-            settled = true;
+            chassisSettled = true;
         }else if (timeSettled > settleTime){
-            settled = true;
+            chassisSettled = true;
         }else {
-            settled = false;
+            chassisSettled = false;
         }
 
         error = normalizeAngle180(targetAngle - normalizeAngle360(imu_sensor.get_heading()));
+        chassisError = error;
 
         if (abs(error) < integralCap){
             integral = integral + error;
@@ -600,7 +634,7 @@ void swingRight(double targetAngle, double maxVoltage, double minVoltage){
     leftdr.set_brake_mode(MOTOR_BRAKE_HOLD);
     rightdr.set_brake_mode(MOTOR_BRAKE_HOLD);
 
-    bool settled = false;
+    chassisSettled = false;
     double error = 0;
     double integral = 0;
     double previousError = 0;
@@ -616,17 +650,18 @@ void swingRight(double targetAngle, double maxVoltage, double minVoltage){
     double timeout = 4000;
     double integralCap = 15;
 
-    while (!settled){
+    while (!chassisSettled){
         
         if (totalTime > timeout && timeout != 0){
-            settled = true;
+            chassisSettled = true;
         }else if (timeSettled > settleTime){
-            settled = true;
+            chassisSettled = true;
         }else {
-            settled = false;
+            chassisSettled = false;
         }
 
         error = normalizeAngle180(targetAngle - normalizeAngle360(imu_sensor.get_heading()));
+        chassisError = error;
 
         if (abs(error) < integralCap){
             integral = integral + error;
