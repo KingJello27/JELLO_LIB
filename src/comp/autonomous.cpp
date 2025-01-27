@@ -1,4 +1,4 @@
-#include "main.h"
+#include "comp/autonomous.hpp"
 #include "robot/subsystems/controller/chassisController.hpp"
 
 /**
@@ -13,8 +13,54 @@
  * from where it left off.
  */
 
+//Auton Selector
+std::array<std::string,9> autonNames = {"Red Left AWP","Red Right AWP","Blue Left AWP","Blue Right AWP", "Red Left Elim","Red Right Elim","Blue Left Elim","Blue Right Elim", "Skills"};
+int selectionIndex = 0;
+
+void leftShift(){
+    selectionIndex--;
+    if (selectionIndex < 0)
+    selectionIndex = 8;
+}
+
+void rightShift(){
+    selectionIndex++;
+    if (selectionIndex > 8)
+    selectionIndex = 0;
+}
+
 
 void autonomous() {
+
+    if (selectionIndex == 0){
+
+
+    }else if (selectionIndex == 1){
+        
+
+    }else if (selectionIndex == 2){
+        
+
+    }else if (selectionIndex == 3){
+       
+        
+    }else if (selectionIndex == 4){
+       
+        
+    }else if (selectionIndex == 5){
+    
+
+    }else if (selectionIndex == 6){
+        
+        
+    }else if (selectionIndex == 7){
+       
+        
+    }else if (selectionIndex == 8){
+
+        
+    }
+
     moveDistance(24, 100, 60, 4000, 15);
     pros::delay(10);
     moveDistance(-24, 100, 60);

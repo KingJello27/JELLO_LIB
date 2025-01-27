@@ -1,4 +1,5 @@
 #include "main.h"
+#include "comp/autonomous.hpp"
 #include "robot/subsystems/managers/pneumaticsManager.hpp"
 #include "robot/subsystems/controller/liftController.hpp"
 #include "robot/subsystems/controller/clampController.hpp"
@@ -13,6 +14,11 @@
  */
 void initialize() {
 	pros::lcd::initialize();
+
+	//Auton Selector
+    pros::lcd::register_btn0_cb(leftShift);
+    pros::lcd::register_btn2_cb(rightShift);
+
 	
 	//Init Functions
 	pneumaticsInit();
