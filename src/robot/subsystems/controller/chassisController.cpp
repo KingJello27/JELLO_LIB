@@ -23,7 +23,6 @@ void chassisMotion(double leftVoltage, double rightVoltage){
 }
 
 //User Control Drive Functions
-
 int driveMode;
 
 void setDriveMode(int input){

@@ -12,14 +12,26 @@
  * will be stopped. Re-enabling the robot will restart the task, not re-start it
  * from where it left off.
  */
+
+
 void autonomous() {
     moveDistance(24, 100, 60, 4000, 15);
     pros::delay(10);
     moveDistance(-24, 100, 60);
     pros::delay(10);
-    turnAngle(90, 127, 60);
+    turnAngle(90, 127, 60, 4000, 10);
     pros::delay(10);
     turnAngle(-90, 127, 60);
+    pros::delay(10);
+    turnAngle(0, 127, 60);
+    pros::delay(10);
+    swingLeft(-90, 127, 60, 4000, 10);
+    pros::delay(10);
+    swingRight(0, 127, 60, 4000, 10);
+    pros::delay(10);
+    swingRight(90, 127, 60);
+    pros::delay(10);
+    swingLeft(0, 127, 60);
 }
 
 /**
