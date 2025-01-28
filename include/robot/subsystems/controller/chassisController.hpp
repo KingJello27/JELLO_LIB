@@ -24,10 +24,8 @@ extern void setDriveMotors();
 //Chassis Movement Function
 extern void chassisMotion(double leftVoltage, double rightVoltage);
 
-//Exit Functions
-// extern void setQuickWait(double input);
-// extern void waitUntil(double input);
-// extern void quickWait();
+//Quick Wait
+extern void setQuickWait(double input);
 
 //Lateral Movement Functions
 extern void moveDistance(double target, double maxVoltage, double minVoltage, double timeout, double integralCap); //Advanced Function

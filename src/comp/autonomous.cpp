@@ -14,7 +14,7 @@
  */
 
 //Auton Selector
-std::array<std::string,9> autonNames = {"Red Left AWP","Red Right AWP","Blue Left AWP","Blue Right AWP", "Red Left Elim","Red Right Elim","Blue Left Elim","Blue Right Elim", "Skills"};
+std::array<std::string,10> autonNames = {"Test Everything","Lateral Test","Angular Test","Swing Test","Quick Wait Test", "Do Nothing","Do Nothing","Do Nothing","Do Nothing", "Do Nothing"};
 int selectionIndex = 0;
 
 void leftShift(){
@@ -25,7 +25,7 @@ void leftShift(){
 
 void rightShift(){
     selectionIndex++;
-    if (selectionIndex > 8)
+    if (selectionIndex > 9)
     selectionIndex = 0;
 }
 
@@ -34,18 +34,70 @@ void autonomous() {
 
     if (selectionIndex == 0){
 
+        setQuickWait(2);
+
+        moveDistance(24, 100, 60, 4000, 15);
+        pros::delay(10);
+        moveDistance(-24, 100, 60);
+        pros::delay(10);
+
+        turnAngle(90, 127, 60, 4000, 10);
+        pros::delay(10);
+        turnAngle(-90, 127, 60);
+        pros::delay(10);
+        turnAngle(0, 127, 60);
+        pros::delay(10);
+
+        swingLeft(-90, 127, 60, 4000, 10);
+        pros::delay(10);
+        swingRight(0, 127, 60, 4000, 10);
+        pros::delay(10);
+        swingRight(90, 127, 60);
+        pros::delay(10);
+        swingLeft(0, 127, 60);
 
     }else if (selectionIndex == 1){
         
+        moveDistance(24, 100, 60, 4000, 15);
+        pros::delay(10);
+        moveDistance(-24, 100, 60);
+        pros::delay(10);
 
     }else if (selectionIndex == 2){
         
+        turnAngle(90, 127, 60, 4000, 10);
+        pros::delay(10);
+        turnAngle(-90, 127, 60);
+        pros::delay(10);
+        turnAngle(0, 127, 60);
+        pros::delay(10);
 
     }else if (selectionIndex == 3){
        
+        swingLeft(-90, 127, 60, 4000, 10);
+        pros::delay(10);
+        swingRight(0, 127, 60, 4000, 10);
+        pros::delay(10);
+        swingRight(90, 127, 60);
+        pros::delay(10);
+        swingLeft(0, 127, 60);
         
     }else if (selectionIndex == 4){
        
+        setQuickWait(2);
+
+        moveDistance(24, 100, 60, 4000, 15);
+        pros::delay(10);
+
+        turnAngle(90, 127, 60, 4000, 10);
+        pros::delay(10);
+        turnAngle(-90, 127, 60);
+        pros::delay(10);
+        turnAngle(0, 127, 60);
+        pros::delay(10);
+
+        moveDistance(-24, 100, 60);
+        pros::delay(10);
         
     }else if (selectionIndex == 5){
     

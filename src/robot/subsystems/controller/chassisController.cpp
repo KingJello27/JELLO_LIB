@@ -5,7 +5,7 @@
 //Chassis Variable
 bool chassisSettled;
 double chassisError;
-// double quickWaitTarget;
+double quickWaitTarget = 0;
 
 //Initialization
 void chassisInit(){
@@ -94,19 +94,11 @@ void setDriveMotors(){
     }
 }
 
-//Exit Functions
+//Quick Wait Functions
+void setQuickWait(double input){
+    quickWaitTarget = input;
+}
 
-// void setQuickWait(double input){
-//     quickWaitTarget = input;
-// }
-
-// void waitUntil(double input){
-
-// }
-
-// void quickWait(){
-
-// }
 
 //Lateral Drive Functions with PID
 
@@ -131,7 +123,12 @@ void moveDistance(double target, double maxVoltage, double minVoltage, double ti
     double timeSettled = 0;
     double totalTime = 0;
 
+    if (quickWaitTarget > 0){
+        target = target + quickWaitTarget;
+    }
+
     while (!chassisSettled){
+
         
         if (totalTime > timeout && timeout != 0){
             chassisSettled = true;
@@ -139,6 +136,11 @@ void moveDistance(double target, double maxVoltage, double minVoltage, double ti
             chassisSettled = true;
         }else {
             chassisSettled = false;
+        }
+
+        if (quickWaitTarget > 0){
+            if (abs(error) < 5)
+            chassisSettled = true;
         }
 
         error = inchesToTicks(target) - ((leftdr.get_position() + rightdr.get_position()) / 2);
