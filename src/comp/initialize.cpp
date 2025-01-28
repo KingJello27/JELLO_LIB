@@ -15,11 +15,17 @@
 void initialize() {
 	pros::lcd::initialize();
 
+	pros::Task screen_task([&]() {
+        while (true) {
+            pros::lcd::print(3, "Auton Selection: %s", autonNames[selectionIndex]);
+            pros::delay(20);
+        }
+	});
+
 	//Auton Selector
     pros::lcd::register_btn0_cb(leftShift);
     pros::lcd::register_btn2_cb(rightShift);
 
-	
 	//Init Functions
 	pneumaticsInit();
 	liftInit();
