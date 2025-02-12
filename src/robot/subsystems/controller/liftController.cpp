@@ -17,7 +17,7 @@ double getData(){
 
 //Setters
 void setPosition(double targetPosition){
-    liftTargetPosition = thetaToTicks(targetPosition);
+    liftTargetPosition = thetaToTicks(targetPosition, liftGearRatio, halfMotor);
 }
 
 //getters

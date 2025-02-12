@@ -10,8 +10,12 @@ double inchesToTicks(double inches){
     return (inches * ticksPerInch);
 }
 
-double thetaToTicks(double theta){
-    return (theta * liftGearRatio);
+double thetaToTicks(double theta, double ratio, double motor){
+    double outputRevolutions = theta / 360;
+    double motorRevolutions = outputRevolutions * ratio;
+    double ticks = motorRevolutions * motor; //627.2 is ticks per revolution
+    return ticks;
+
 }
 
 double voltsToPower(double voltage){

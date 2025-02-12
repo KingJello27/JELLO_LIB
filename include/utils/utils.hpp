@@ -5,10 +5,12 @@
 const double wheelDiameter = 3.25;         // Diameter in inches
 const double driveGearRatio = 48.0 / 36.0;      // Gear ratio (driven/driving)
 const double liftGearRatio = 5 / 1;
+const double halfMotor = 627.2;
+const double fullMotor = 392.0;
 
 //Conversion Function
 extern double inchesToTicks(double inches);
-extern double thetaToTicks(double theta);
+extern double thetaToTicks(double theta, double ratio, double motor);
 extern double voltsToPower(double voltage);
 extern double powerToVolts(double power);
 

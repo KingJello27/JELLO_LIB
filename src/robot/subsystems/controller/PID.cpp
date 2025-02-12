@@ -68,11 +68,10 @@ void moveDistance(double target, double maxVoltage, double minVoltage, double ti
             integral = 0;
         }
 
-        output = (latKp * error) + (latKi * integral) + (latKd * derivative);
-
+        derivative = error - previousError;
         previousError = error;
 
-        derivative = error - previousError;
+        output = (latKp * error) + (latKi * integral) + (latKd * derivative);
 
         if (abs(error) < inchesToTicks(settleError)){
             timeSettled = timeSettled + updatePeriod;
@@ -154,11 +153,10 @@ void moveDistance(double target, double maxVoltage, double minVoltage){
             integral = 0;
         }
 
-        output = (latKp * error) + (latKi * integral) + (latKd * derivative);
-
-        previousError = error;
-        
         derivative = error - previousError;
+        previousError = error;
+
+        output = (latKp * error) + (latKi * integral) + (latKd * derivative);
 
         if (abs(error) < inchesToTicks(settleError)){
             timeSettled = timeSettled + updatePeriod;
@@ -233,11 +231,10 @@ void turnAngle(double targetAngle, double maxVoltage, double minVoltage, double 
             integral = 0;
         }
 
-        output = (angKp * error) + (angKi * integral) + (angKd * derivative);
-
+        derivative = error - previousError;
         previousError = error;
 
-        derivative = error - previousError;
+        output = (angKp * error) + (angKi * integral) + (angKd * derivative);
 
         if (abs(error) < settleError){
             timeSettled = timeSettled + updatePeriod;
@@ -313,11 +310,10 @@ void turnAngle(double targetAngle, double maxVoltage, double minVoltage){
             integral = 0;
         }
 
-        output = (angKp * error) + (angKi * integral) + (angKd * derivative);
-
+        derivative = error - previousError;
         previousError = error;
 
-        derivative = error - previousError;
+        output = (angKp * error) + (angKi * integral) + (angKd * derivative);
 
         if (abs(error) < settleError){
             timeSettled = timeSettled + updatePeriod;
@@ -392,11 +388,10 @@ void swingLeft(double targetAngle, double maxVoltage, double minVoltage, double 
             integral = 0;
         }
 
-        output = (swingKp * error) + (swingKi * integral) + (swingKd * derivative);
-
+        derivative = error - previousError;
         previousError = error;
 
-        derivative = error - previousError;
+        output = (swingKp * error) + (swingKi * integral) + (swingKd * derivative);
 
         if (abs(error) < settleError){
             timeSettled = timeSettled + updatePeriod;
@@ -467,11 +462,10 @@ void swingRight(double targetAngle, double maxVoltage, double minVoltage, double
             integral = 0;
         }
 
-        output = (swingKp * error) + (swingKi * integral) + (swingKd * derivative);
-
+        derivative = error - previousError;
         previousError = error;
 
-        derivative = error - previousError;
+        output = (swingKp * error) + (swingKi * integral) + (swingKd * derivative);
 
         if (abs(error) < settleError){
             timeSettled = timeSettled + updatePeriod;
@@ -547,11 +541,10 @@ void swingLeft(double targetAngle, double maxVoltage, double minVoltage){
             integral = 0;
         }
 
-        output = (swingKp * error) + (swingKi * integral) + (swingKd * derivative);
-
+        derivative = error - previousError;
         previousError = error;
 
-        derivative = error - previousError;
+        output = (swingKp * error) + (swingKi * integral) + (swingKd * derivative);
 
         if (abs(error) < settleError){
             timeSettled = timeSettled + updatePeriod;
@@ -626,11 +619,10 @@ void swingRight(double targetAngle, double maxVoltage, double minVoltage){
             integral = 0;
         }
 
-        output = (swingKp * error) + (swingKi * integral) + (swingKd * derivative);
-
+        derivative = error - previousError;
         previousError = error;
 
-        derivative = error - previousError;
+        output = (swingKp * error) + (swingKi * integral) + (swingKd * derivative);
 
         if (abs(error) < settleError){
             timeSettled = timeSettled + updatePeriod;
